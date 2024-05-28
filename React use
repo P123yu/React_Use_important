@@ -72,6 +72,23 @@ export default Demo;
 
 
 
+// --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+// call the given function after 5 seconds   useTimeoutFn()      Diable Text after 5 second (initially text is visible)
+
+import React, { useState } from "react";
+import { useTimeoutFn } from "react-use";
+const Demo = () => {
+  const [value, setValue] = useState(true);
+  const fn = () => {
+    setValue(false);
+  };
+  const [isReady] = useTimeoutFn(fn, 5000);
+  return <>{value && <div>hello</div>}</>;
+};
+export default Demo;
+
 
 
 

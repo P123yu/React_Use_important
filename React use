@@ -1,0 +1,363 @@
+
+// Reload the Component after 5 seconds   useTimeout()
+
+import React from "react";
+import { useTimeout } from "react-use";
+function Demo() {
+  const [isReady, cancel] = useTimeout(5000);
+  console.log(isReady());
+  return (
+    <>
+      {Date.now()}
+    </>
+  );
+}
+export default Demo;
+
+
+// Reload the component whenever update button is clicked   useUpdate()
+
+import { useUpdate } from "react-use";
+const Demo = () => {
+  const update = useUpdate();
+  return (
+    <>
+      <div>Time: {Date.now()}</div>
+      <button onClick={update}>Update</button>
+    </>
+  );
+};
+export default Demo;
+
+
+// call the given function after 5 seconds   useTimeoutFn()
+
+import React, { useState } from "react";
+import { useTimeoutFn } from "react-use";
+const Demo = () => {
+  const [value, setValue] = useState("");
+  const fn = () => {
+    setValue("hello");
+  };
+  const [isReady] = useTimeoutFn(fn, 5000);
+  return <div>{value}</div>;
+};
+export default Demo;
+
+
+// reload the component after every 2 seconds   useInterval()
+
+import * as React from "react";
+import { useInterval } from "react-use";
+
+const Demo = () => {
+  const [delay, setDelay] = React.useState(2000);
+  const [toggle, setToggle] = React.useState(true);
+  const [value, setValue] = React.useState(0);
+  useInterval(
+    () => {
+      setValue(value + 1);
+    },
+    toggle ? delay : null
+  );
+  console.log(value, "value");
+  return (
+    <div>
+      {value}
+      <h3 onClick={() => setToggle(!toggle)}>stop</h3>
+    </div>
+  );
+};
+export default Demo;
+
+
+
+
+
+
+
+
+
+
+
+
+
+// -----------------------------------------------------------------------------------------------------  store  ----------------------------------
+
+// import React from "react";
+// import { useTimeoutFn } from "react-use";
+
+// const Demo = () => {
+//   //   const [state, setState] = React.useState("Not called yet");
+
+//   //   function fn() {
+//   //     setState(`called at ${Date.now()}`);
+//   //   }
+
+//   const fn = () => {
+//     console.log("hello");
+//   };
+
+//   const [isReady, cancel, reset] = useTimeoutFn(fn, 5000);
+
+//   // const cancelButtonClick = useCallback(() => {
+//   //   if (isReady() === false) {
+//   //     cancel();
+//   //     setState(`cancelled`);
+//   //   } else {
+//   //     reset();
+//   //     setState("Not called yet");
+//   //   }
+//   // }, []);
+
+//   //   const readyState = isReady();
+//   //   console.log(readyState, "readyState");
+
+//   //   if(readyState==true){
+
+//   //   }
+
+//   return (
+//     <div>
+//       {/* <div>
+//         {readyState !== null
+//           ? "Function will be called in 5 seconds"
+//           : "Timer cancelled"}
+//       </div>
+//       <button onClick={cancelButtonClick}>
+//         {" "}
+//         {readyState === false ? "cancel" : "restart"} timeout
+//       </button>
+//       <br />
+//       <div>
+//         Function state:{" "}
+//         {readyState === false ? "Pending" : readyState ? "Called" : "Cancelled"}
+//       </div>
+//       <div>{state}</div> */}
+//     </div>
+//   );
+// };
+
+// export default Demo;
+
+//--------------------------------------------------------------------
+
+// import React from "react";
+// import { useTimeoutFn } from "react-use";
+
+// const Demo = () => {
+//   const fn = () => {
+//     console.log("hello");
+//   };
+//   const [isReady, cancel, reset] = useTimeoutFn(fn, 5000);
+//   return <div></div>;
+// };
+
+// export default Demo;
+
+// import React from "react";
+// import { useTimeoutFn } from "react-use";
+
+// const Demo = () => {
+//   const fn = () => {
+//     console.log("hello");
+//   };
+//   const [isReady] = useTimeoutFn(fn, 2000);
+//   return <div></div>;
+// };
+
+// export default Demo;
+
+// import React, { useState } from "react";
+// import { useTimeoutFn } from "react-use";
+// const Demo = () => {
+//   const [value, setValue] = useState("");
+//   const fn = () => {
+//     setValue("hello");
+//   };
+//   const [isReady] = useTimeoutFn(fn, 5000);
+//   return <div>{value}</div>;
+// };
+
+// export default Demo;
+
+// import * as React from "react";
+// import { useBoolean, useInterval } from "react-use";
+
+// const Demo = () => {
+//   const [delay, setDelay] = React.useState(1000);
+//   const [isRunning, toggleIsRunning] = useBoolean(true);
+
+//   useInterval(
+//     () => {
+//       console.log("hello");
+//     },
+//     isRunning ? delay : null
+//   );
+
+//   return (
+//     <div>
+//       <div>
+//         <button onClick={toggleIsRunning}>
+//           {isRunning ? "stop" : "start"}
+//         </button>
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default Demo;
+
+// import * as React from "react";
+// import { useInterval } from "react-use";
+
+// const Demo = () => {
+//   const [delay, setDelay] = React.useState(1000);
+//   const [toggle, setToggle] = React.useState(true);
+//   useInterval(
+//     () => {
+//       console.log("hello");
+//     },
+//     toggle ? delay : null
+//   );
+//   return (
+//     <div>
+//       <h3 onClick={() => setToggle(!toggle)}>stop</h3>
+//     </div>
+//   );
+// };
+
+// export default Demo;
+
+// import * as React from "react";
+// import { useInterval } from "react-use";
+
+// const Demo = () => {
+//   const [delay, setDelay] = React.useState(2000);
+//   const [toggle, setToggle] = React.useState(true);
+//   const [value, setValue] = React.useState(0);
+//   useInterval(
+//     () => {
+//       setValue(value + 1);
+//     },
+//     toggle ? delay : null
+//   );
+
+//   console.log(value, "value");
+//   return (
+//     <div>
+//       {value}
+//       <h3 onClick={() => setToggle(!toggle)}>stop</h3>
+//     </div>
+//   );
+// };
+
+// export default Demo;
+
+// // if click on button it is going to update whole page
+
+// import { useUpdate } from "react-use";
+
+// const Demo = () => {
+//   const update = useUpdate();
+//   return (
+//     <>
+//       <div>Time: {Date.now()}</div>
+//       <button onClick={update}>Update</button>
+//     </>
+//   );
+// };
+
+// export default Demo;
+
+// import React from "react";
+// import { useTimeout } from "react-use";
+
+// function Demo() {
+//   const [isReady, cancel] = useTimeout(5000);
+
+//   return (
+//     <div>
+//       {isReady() ? "I'm reloaded after timeout" : "I will be reloaded after "}
+//       {isReady() === false && <button onClick={cancel}>Cancel</button>}
+//     </div>
+//   );
+// }
+
+// export default Demo;
+
+
+
+// Reload the Component after 5 seconds   useTimeout()
+
+import React from "react";
+import { useTimeout } from "react-use";
+function Demo() {
+  const [isReady, cancel] = useTimeout(5000);
+  console.log(isReady());
+  return (
+    <>
+      {Date.now()}
+    </>
+  );
+}
+export default Demo;
+
+
+// Reload the component whenever update button is clicked   useUpdate()
+
+import { useUpdate } from "react-use";
+const Demo = () => {
+  const update = useUpdate();
+  return (
+    <>
+      <div>Time: {Date.now()}</div>
+      <button onClick={update}>Update</button>
+    </>
+  );
+};
+export default Demo;
+
+
+// call the given function after 5 seconds   useTimeoutFn()
+
+import React, { useState } from "react";
+import { useTimeoutFn } from "react-use";
+const Demo = () => {
+  const [value, setValue] = useState("");
+  const fn = () => {
+    setValue("hello");
+  };
+  const [isReady] = useTimeoutFn(fn, 5000);
+  return <div>{value}</div>;
+};
+export default Demo;
+
+
+// reload the component after every 2 seconds   useInterval()
+
+import * as React from "react";
+import { useInterval } from "react-use";
+
+const Demo = () => {
+  const [delay, setDelay] = React.useState(2000);
+  const [toggle, setToggle] = React.useState(true);
+  const [value, setValue] = React.useState(0);
+  useInterval(
+    () => {
+      setValue(value + 1);
+    },
+    toggle ? delay : null
+  );
+  console.log(value, "value");
+  return (
+    <div>
+      {value}
+      <h3 onClick={() => setToggle(!toggle)}>stop</h3>
+    </div>
+  );
+};
+export default Demo;
+
+
+

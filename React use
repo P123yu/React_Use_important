@@ -128,7 +128,35 @@ export default Demo;
         
         
    
-  
+// ----------------------------------------------------------------
+
+// reference for above
+
+const [value, setValue] = useState(0);
+
+useEffect(() => {
+  if (value === 0) {
+       getPdfData();
+    } 
+else {
+      getMyDocData();
+     }
+}, [value]);
+
+const getPdfData = () => {
+     axios
+       .get('http://localhost:8080/pdf/getAll')
+       .then((response) => setPdfData(response.data))
+       .catch((error) => console.log(error));
+   };
+
+const getMyDocData = () => {
+     axios
+        .get('http://localhost:8080/myDoc/getAll')
+        .then((response) => setMyDocData(response.data))
+        .catch((error) => console.log(error));
+};
+
 
 
 

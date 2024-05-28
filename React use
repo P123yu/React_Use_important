@@ -45,7 +45,95 @@ const Demo = () => {
 export default Demo;
 
 
+// ---------------------------------------------------------------------------------
+
 // reload the component after every 2 seconds   useInterval()
+
+// clock here delay is default of 1 sec 
+
+import dateTime from "date-time";
+import React, { useState } from "react";
+import { useInterval } from "react-use";
+const Demo = () => {
+  const [count, setCount] = useState(0);
+  useInterval(() => {
+    setCount(count + 1);
+  });
+  return <div>{dateTime().split(" ")[1]}</div>;
+};
+export default Demo;
+
+
+// set custom delay on clock
+
+import dateTime from "date-time";
+import React, { useState } from "react";
+import { useInterval } from "react-use";
+const Demo = () => {
+  const [delay, setDelay] = useState(3000);
+  const [count, setCount] = useState(0);
+  useInterval(
+    () => {
+      setCount(count + 1);
+    },
+    true ? delay : null
+  );
+  return <div>{dateTime().split(" ")[1]}</div>;
+};
+export default Demo;
+
+
+// if time matches print or call api
+
+import dateTime from "date-time";
+import React, { useState } from "react";
+import { useInterval } from "react-use";
+const Demo = () => {
+  const [count, setCount] = useState(0);
+  useInterval(
+    () => {
+      setCount(count + 1);
+    }
+  );
+  if (dateTime().split(" ")[1] == "00:34:40") {
+    console.log("hello");
+  }
+  return <div>{dateTime().split(" ")[1]}</div>;
+};
+export default Demo;
+
+
+============================================================================================================   important ===========================================================
+
+
+import axios from "axios";
+import dateTime from "date-time";
+import React, { useEffect, useState } from "react";
+import { useInterval } from "react-use";
+
+const Demo = () => {
+  const [count, setCount] = useState(0);
+  useInterval(() => {
+    setCount(count + 1);
+  });
+  useEffect(() => {                                                                          // it will runs and fetch api infinitely even thought time matches single time
+    if (dateTime().split(" ")[1] == "00:46:50") {                                            //   if (dateTime().split(" ")[1] == "00:42:50") {                                      
+          axios.get("https://jsonplaceholder.typicode.com/users")                            //       axios.get("https://jsonplaceholder.typicode.com/users")
+                .then((res) => console.log(res.data));                                       //       .then((res) => console.log(res.data));
+   }                                                                                         //   }
+}, [dateTime().split(" ")[1]]);
+  return <div>{dateTime().split(" ")[1]}</div>;
+};
+export default Demo;
+        
+        
+   
+  
+
+
+
+// -----------------------------------------------------------------------
+
 
 import * as React from "react";
 import { useInterval } from "react-use";
